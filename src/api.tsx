@@ -1,8 +1,8 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
 export const api = axios.create({
-  baseURL: process.env.BACKEND_URL,
+  baseURL: "http://127.0.0.1:8001",
 });

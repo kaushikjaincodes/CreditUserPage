@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
-import {api} from '@/api';
+import { api } from '@/api';
 import axios from 'axios';
 
 const loanTypes = [
@@ -59,6 +59,7 @@ const UserForm = ({ userType }: UserFormProps) => {
     loanAmount: '',
     loanPeriod: '',
   });
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -117,11 +118,20 @@ const UserForm = ({ userType }: UserFormProps) => {
     e.preventDefault();
     
     if (validateLoanSection()) {
+      setLoading(true);
       try {
         const formDataToSend = new FormData();
-        Object.keys(formData).forEach((key) => {
-          formDataToSend.append(key, formData[key]);
-        });
+        formDataToSend.append('first_name', formData.firstName);
+        formDataToSend.append('middle_name', formData.middleName);
+        formDataToSend.append('last_name', formData.lastName);
+        formDataToSend.append('loan_type', formData.loanType);
+        formDataToSend.append('loan_description', formData.loanDescription);
+        formDataToSend.append('pan_id', formData.panCardNumber);
+        formDataToSend.append('ais', formData.aisDocument);
+        formDataToSend.append('bank_statement', formData.bankStatement);
+        formDataToSend.append('org_id', 'a3c5a7d8-0ce4-480e-8c5f-eb66f52d91ba');
+        formDataToSend.append('user_id', '2a28b7da-9ddf-4197-ba12-e92ff01ad89d');
+        formDataToSend.append('loan_amount', formData.loanAmount);
 
         const response = await api.post('/loan/submit', formDataToSend, {
           headers: {
@@ -145,6 +155,8 @@ const UserForm = ({ userType }: UserFormProps) => {
           description: "There was an error submitting your application. Please try again.",
           variant: "destructive",
         });
+      } finally {
+        setLoading(false);
       }
     } else {
       toast({
@@ -438,7 +450,9 @@ const UserForm = ({ userType }: UserFormProps) => {
               
               <div className="flex justify-between">
                 <Button variant="outline" onClick={handleBack} type="button">Back</Button>
-                <Button type="submit">Submit Application</Button>
+                <Button type="submit" disabled={loading}>
+                  {loading ? 'Submitting...' : 'Submit Application'}
+                </Button>
               </div>
             </div>
           )}
