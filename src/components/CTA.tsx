@@ -30,7 +30,7 @@ const CTA = () => {
                 Ready to Transform Your Lending?
               </h2>
               <p className="text-lg text-white/70 mb-0">
-                Join financial institutions using CreditCloud Symphony to make faster, smarter lending decisions.
+                Join financial institutions using CreditX to make faster, smarter lending decisions.
               </p>
             </div>
             

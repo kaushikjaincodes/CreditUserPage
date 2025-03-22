@@ -31,7 +31,7 @@ const Navbar = () => {
           className="text-xl md:text-2xl font-display font-bold text-white flex items-center"
         >
           <span className="text-gradient-blue mr-1 font-sans">Credit</span>
-          <span className="text-white font-sans">Cloud</span>
+          <span className="text-white font-sans">X</span>
         </Link>
         
         <nav className="hidden md:flex items-center space-x-6">

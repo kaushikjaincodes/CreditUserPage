@@ -65,7 +65,7 @@ const BenefitsSection = () => {
           <p className={`text-lg text-white/70 max-w-2xl mx-auto transition-all duration-700 ease-out font-sans ${
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`} style={{ transitionDelay: '100ms' }}>
-            CreditCloud Symphony transforms how financial institutions assess and manage credit risk
+            CreditX transforms how financial institutions assess and manage credit risk
           </p>
         </div>
         

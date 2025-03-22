@@ -10,10 +10,10 @@ const Footer = () => {
           <div className="col-span-2">
             <Link to="/" className="text-xl  font-bold text-white flex items-center mb-4">
               <span className="text-gradient-blue mr-1">Credit</span>
-              <span className="text-white">Cloud</span>
+              <span className="text-white">X</span>
             </Link>
             <p className="text-white/60 mb-6 max-w-md">
-              CreditCloud Symphony unifies credit bureau data to provide financial institutions with comprehensive 
+              CreditX unifies credit bureau data to provide financial institutions with comprehensive 
               borrower insights for smarter lending decisions.
             </p>
             <div className="flex space-x-4">
@@ -73,7 +73,7 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} CreditCloud Symphony. All rights reserved.
+            &copy; {new Date().getFullYear()} CreditX. All rights reserved.
           </p>
           
           <div className="flex space-x-6">

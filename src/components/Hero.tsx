@@ -48,7 +48,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-white/70 max-w-3xl font-sans mb-8 animate-fade-in" style={{animationDelay: '200ms'}}>
-            CreditCloud Symphony unifies and normalizes credit data from multiple bureaus, 
+            CreditX unifies and normalizes credit data from multiple bureaus, 
             giving financial institutions a comprehensive view for smarter lending decisions.
           </p>
           

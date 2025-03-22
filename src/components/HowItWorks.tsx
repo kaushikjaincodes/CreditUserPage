@@ -59,7 +59,7 @@ const HowItWorks = () => {
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            How CreditCloud Symphony Works
+            How CreditX Symphony Works
           </h2>
           <p className={`font-sans text-lg text-white/70 max-w-2xl mx-auto transition-all duration-700 ease-out ${
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'

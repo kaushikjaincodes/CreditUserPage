@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -27,6 +26,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
+import {api} from '@/api';
+import axios from 'axios';
 
 const loanTypes = [
   { value: 'personal', label: 'Personal Loan', icon: User },
@@ -50,7 +51,6 @@ const UserForm = ({ userType }: UserFormProps) => {
     middleName: '',
     lastName: '',
     email: '',
-    password: '',
     panCardNumber: '',
     bankStatement: null as File | null,
     aisDocument: null as File | null,
@@ -77,8 +77,8 @@ const UserForm = ({ userType }: UserFormProps) => {
   };
 
   const validatePersonalSection = () => {
-    const { firstName, lastName, email, password } = formData;
-    return firstName && lastName && email && password;
+    const { firstName, lastName, email } = formData;
+    return firstName && lastName && email;
   };
 
   const validateDocumentsSection = () => {
@@ -113,20 +113,39 @@ const UserForm = ({ userType }: UserFormProps) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateLoanSection()) {
-      // In a real application, you would submit the form data to your API here
-      console.log('Form data submitted:', formData);
-      
-      toast({
-        title: "Application submitted",
-        description: "Your loan application has been submitted successfully.",
-      });
-      
-      // Redirect to dashboard
-      navigate('/dashboard');
+      try {
+        const formDataToSend = new FormData();
+        Object.keys(formData).forEach((key) => {
+          formDataToSend.append(key, formData[key]);
+        });
+
+        const response = await api.post('/loan/submit', formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        console.log('Form data submitted:', response.data);
+        
+        toast({
+          title: "Application submitted",
+          description: "Your loan application has been submitted successfully.",
+        });
+        
+        // Redirect to dashboard
+        navigate('/dashboard');
+      } catch (error) {
+        console.error('Error submitting form data:', error);
+        toast({
+          title: "Submission error",
+          description: "There was an error submitting your application. Please try again.",
+          variant: "destructive",
+        });
+      }
     } else {
       toast({
         title: "Missing information",
@@ -252,19 +271,7 @@ const UserForm = ({ userType }: UserFormProps) => {
                 />
               </div>
               
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="mt-1 bg-white/5 border-white/10 text-white"
-                  placeholder="••••••••"
-                  required
-                />
-              </div>
+              
               
               <div className="flex justify-end">
                 <Button onClick={handleNext} type="button">Continue</Button>
